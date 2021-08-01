@@ -1,4 +1,4 @@
-package com.example.pedulidigital.data
+package com.example.pedulidigital.data.remote
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

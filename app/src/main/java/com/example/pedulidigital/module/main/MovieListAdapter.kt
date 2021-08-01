@@ -1,17 +1,20 @@
-package com.example.pedulidigital
+package com.example.pedulidigital.module.main
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pedulidigital.data.ApiEndpoint
-import com.example.pedulidigital.module.Movie
+import com.example.pedulidigital.R
+import com.example.pedulidigital.data.remote.ApiEndpoint
+import com.example.pedulidigital.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieListAdapter(
     private val data: MutableList<Movie> = mutableListOf()
 ): RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
+
+    private var listener: MovieListListener? = null
 
     inner class MovieListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(item: Movie) {
@@ -19,6 +22,9 @@ class MovieListAdapter(
                 .into(itemView.itemMovieImageView)
             itemView.itemMovieTextView.text = item.title
             itemView.itemMovieRatingTextView.text = item.voteAverage.toString()
+            itemView.setOnClickListener {
+                listener?.onMovieClicked(item.id)
+            }
         }
     }
 
@@ -40,5 +46,13 @@ class MovieListAdapter(
         }
         data.addAll(newData)
         notifyDataSetChanged()
+    }
+
+    fun setListener(newListener: MovieListListener) {
+        this.listener = newListener
+    }
+
+    interface MovieListListener {
+        fun onMovieClicked(id: Int)
     }
 }

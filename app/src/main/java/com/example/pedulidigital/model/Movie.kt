@@ -1,4 +1,4 @@
-package com.example.pedulidigital.module
+package com.example.pedulidigital.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -7,5 +7,6 @@ data class Movie(
     @SerializedName("poster_path")
     val posterPath: String,
     @SerializedName("vote_average")
-    val voteAverage: Double
+    val voteAverage: Double,
+    val id: Int
 )
